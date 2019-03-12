@@ -1,0 +1,524 @@
+
+	Classroom License -- for classroom instructional use only.
+
+>> syms x
+>> x
+ 
+x =
+ 
+x
+ 
+>> f = x^2+1
+ 
+f =
+ 
+x^2 + 1
+ 
+>> syms a
+>> f = x^2+a
+ 
+f =
+ 
+x^2 + a
+ 
+>> f = x^2+1
+ 
+f =
+ 
+x^2 + 1
+ 
+>> %x^2+1=0
+>> solve(f)
+ 
+ans =
+ 
+ -1i
+  1i
+ 
+>> solve(f,x)
+ 
+ans =
+ 
+ -1i
+  1i
+ 
+>> syms x 'clear' 
+>> syms x 'real'
+>> solve(f,x)
+ 
+ans =
+ 
+Empty sym: 0-by-1
+ 
+>> syms x 'postitve'
+>> solve(f,x)
+ 
+ans =
+ 
+Empty sym: 0-by-1
+ 
+>> f = x^2-1
+ 
+f =
+ 
+x^2 - 1
+ 
+>> solve(f,x)
+ 
+ans =
+ 
+ -1
+  1
+ 
+>> syms x 'postitve'
+>> solve(f,x)
+ 
+ans =
+ 
+ -1
+  1
+ 
+>> syms x 'positive'
+>> solve(f,x)
+ 
+ans =
+ 
+1
+ 
+>> syms x 'clear'
+>> solve(f,x)
+ 
+ans =
+ 
+ -1
+  1
+ 
+>> whos
+  Name          Size            Bytes  Class    Attributes
+
+  a             1x1                 8  sym                
+  ans           2x1                 8  sym                
+  f             1x1                 8  sym                
+  postitve      1x1                 8  sym                
+  x             1x1                 8  sym                
+
+>> syms x 'clear'
+>> whos
+  Name          Size            Bytes  Class    Attributes
+
+  a             1x1                 8  sym                
+  ans           2x1                 8  sym                
+  f             1x1                 8  sym                
+  postitve      1x1                 8  sym                
+  x             1x1                 8  sym                
+
+>> solve(f,x)
+ 
+ans =
+ 
+ -1
+  1
+ 
+>> double(solve(f,x)) %ja vajadzīgs ir tikai skaitlis
+
+ans =
+
+    -1
+     1
+
+>> syms a
+>> f
+ 
+f =
+ 
+x^2 - 1
+ 
+>> solve(f,x)
+ 
+ans =
+ 
+ -1
+  1
+ 
+>> f = x^2-a
+ 
+f =
+ 
+x^2 - a
+ 
+>> solve(f,x)
+ 
+ans =
+ 
+ -a^(1/2)
+  a^(1/2)
+ 
+>> pretty(f) %palīdzēs labāk stādīt priekšā rezultātu
+ 2
+x  - a
+
+>> diff(f) %atvasina izteiksmi
+ 
+ans =
+ 
+2*x
+ 
+>> int(f) %integrē funkciju
+ 
+ans =
+ 
+x^3/3 - a*x
+ 
+>> t=[2 4 6]
+
+t =
+
+     2     4     6
+
+>> diff(t)
+
+ans =
+
+     2     2
+
+>> f=x^2+1
+ 
+f =
+ 
+x^2 + 1
+ 
+>> diff(f)
+ 
+ans =
+ 
+2*x
+ 
+>> int(f)
+ 
+ans =
+ 
+(x*(x^2 + 3))/3
+ 
+>> izt=f
+ 
+izt =
+ 
+x^2 + 1
+ 
+>> izt=int(f)
+ 
+izt =
+ 
+(x*(x^2 + 3))/3
+ 
+>> pretty(izt)
+    2
+x (x  + 3)
+----------
+     3
+
+>> simplify(izt)
+ 
+ans =
+ 
+(x*(x^2 + 3))/3
+ 
+>> expand(izt)
+ 
+ans =
+ 
+x^3/3 + x
+ 
+>> collect(izt)
+ 
+ans =
+ 
+x^3/3 + x
+ 
+>> pretty(expand(izt))
+ 3
+x
+-- + x
+ 3
+
+>> izt
+ 
+izt =
+ 
+(x*(x^2 + 3))/3
+ 
+>> limit(1/(x-1),x, 1)
+ 
+ans =
+ 
+NaN
+ 
+>> limit(1/(x-1),x, 1, "right") %no kuras puses
+ 
+ans =
+ 
+Inf
+ 
+>> %vpa precīzi aprēķini
+>> eps
+
+ans =
+
+   2.2204e-16
+
+>> vpa(sqrt(2))
+ 
+ans =
+ 
+1.4142135623730950488016887242097
+ 
+>> vpa(sqrt(2), 64)
+ 
+ans =
+ 
+1.414213562373095048801688724209698078569671875376948073176679738
+ 
+>> vpa(pi(2), 5)
+Error using pi
+Too many input arguments.
+ 
+>> vpa(pi, 5)
+ 
+ans =
+ 
+3.1416
+ 
+>> f
+ 
+f =
+ 
+x^2 + 1
+ 
+>> f=x^2-1
+ 
+f =
+ 
+x^2 - 1
+ 
+>> ezplot(f) 
+>> izt = (x^2-5)/(x-1)
+ 
+izt =
+ 
+(x^2 - 5)/(x - 1)
+ 
+>> ezplot(izt)
+>> ezplot(izt,[-12,-5])
+>> izt
+ 
+izt =
+ 
+(x^2 - 5)/(x - 1)
+ 
+>> x = -6:0.01:6;
+>> whos
+  Name          Size              Bytes  Class     Attributes
+
+  a             1x1                   8  sym                 
+  ans           1x1                   8  sym                 
+  f             1x1                   8  sym                 
+  izt           1x1                   8  sym                 
+  postitve      1x1                   8  sym                 
+  t             1x3                  24  double              
+  x             1x1201             9608  double              
+
+>> y = (x.^2 - 5)./(x - 1);
+>> vectorize(izt)
+
+ans =
+
+    '(x.^2 - 5)./(x - 1)'
+
+>> y = (x.^2 - 5)./(x - 1);
+>> plot(x,y)
+>> x = linspace(-6,6,1000); %1000-uzdotais punktu skaits no -6 līdz 6, tādā veidā nav jāmaina solis
+>> linspace(x)
+Not enough input arguments.
+
+Error in linspace (line 19)
+    n = floor(double(n));
+ 
+>> lenght(x)
+Undefined function or variable 'lenght'.
+ 
+Did you mean:
+>> length(x)
+
+ans =
+
+        1000
+
+>> y = (x.^2 - 5)./(x - 1); %nokopēt y nav labākais variants tāpēc izmanto eval funkciju
+>> eval("syms x")
+>> teksts = "x=5";
+>> eval(teksts)
+
+x =
+
+     5
+
+>> x = linspace(-6,6,1000);
+>> izt
+ 
+izt =
+ 
+(x^2 - 5)/(x - 1)
+ 
+>> y = eval(izt); %lai izpildītos eval vajag nodefinēt x, izteiksmi, kurā ir x, tādā veidā ar eval var aprēķināt y
+>> plot(x,y)
+>> %vēl skaidrāk būtu ja ņem funkciju y=eval(vectorize(izt))
+>> 
+>> 
+>> 
+>> 
+>> 
+>> 
+>> %secīgi viss būtu:
+>> syms x
+>> izt = (x^2-5)/(x-1)
+ 
+izt =
+ 
+(x^2 - 5)/(x - 1)
+ 
+>> izt_d = diff(izt)
+ 
+izt_d =
+ 
+(2*x)/(x - 1) - (x^2 - 5)/(x - 1)^2
+ 
+>> collect(izt_d) %uztaisa kompaktāk
+ 
+ans =
+ 
+(x^2 - 2*x + 5)/(x^2 - 2*x + 1)
+ 
+>> pretty(collect(izt_d))
+ 2
+x  - 2 x + 5
+------------
+ 2
+x  - 2 x + 1
+
+>> pretty(izt_d)
+          2
+ 2 x     x  - 5
+----- - --------
+x - 1          2
+        (x - 1)
+
+>> whos x
+  Name      Size            Bytes  Class    Attributes
+
+  x         1x1                 8  sym                
+
+>> x = linspace(-6,6,1000);
+>> izt_d
+ 
+izt_d =
+ 
+(2*x)/(x - 1) - (x^2 - 5)/(x - 1)^2
+ 
+>> whos izt_d
+  Name       Size            Bytes  Class    Attributes
+
+  izt_d      1x1                 8  sym                
+
+>> %par cik ir tikai viens nezināmais x var aprēķināt y izmantojot eval bez kopēšanas
+>> y = eval(vectorize(izt));
+>> whos y
+  Name      Size              Bytes  Class     Attributes
+
+  y         1x1000             8000  double              
+
+>> plot(x,y)
+>> y = eval(vectorize(izt));
+>> plot(x,y)
+>> y = eval(vectorize(izt_d));
+>> plot(x,y)
+>> izt_d
+ 
+izt_d =
+ 
+(2*x)/(x - 1) - (x^2 - 5)/(x - 1)^2
+ 
+>> solve(izt_d)
+ 
+ans =
+ 
+ 1 - 2i
+ 1 + 2i
+ 
+>> %solve, diff, int, limit, vpa, pretty, collect, simplify - svarīgākās funkcijas
+>> izt_d
+ 
+izt_d =
+ 
+(2*x)/(x - 1) - (x^2 - 5)/(x - 1)^2
+ 
+>> latex(izt_d) %ieliekot latexā visu šo izrēķināto tas to izdara pareizi
+
+ans =
+
+    '\frac{2\,x}{x-1}-\frac{x^2-5}{{\left(x-1\right)}^2}'
+
+>> %likt ar begin(equation) un end
+>> syms x
+>> f = 4x^2+3x
+ f = 4x^2+3x
+      ↑
+Error: Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or
+other syntax error. To construct matrices, use brackets instead of parentheses.
+ 
+Did you mean:
+>> f = 4*x^2 + 3*x
+ 
+f =
+ 
+4*x^2 + 3*x
+ 
+>> solve(f)
+ 
+ans =
+ 
+ -3/4
+    0
+ 
+>> diff(f)
+ 
+ans =
+ 
+8*x + 3
+ 
+>> int(f)
+ 
+ans =
+ 
+(x^2*(8*x + 9))/6
+ 
+>> vpa(f)
+ 
+ans =
+ 
+4.0*x^2 + 3.0*x
+ 
+>> pretty(int(f))
+ 2
+x  (8 x + 9)
+------------
+      6
+
+>> collect(diff(f))
+ 
+ans =
+ 
+8*x + 3
+ 
+>> x = linspace(-5,5,20);
+>> y = eval(int(f));
+>> plot(x,y)
