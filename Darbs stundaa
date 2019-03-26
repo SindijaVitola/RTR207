@@ -1,0 +1,64 @@
+t = 0:0.01:2;
+>> y = sin(2*pi*t);
+>> plot(t,y)
+>> y = sin(2*pi*t*3);
+>> plot(t,y)
+>> % y = sin(2*pi*t*3) 3-frekvence
+>> %fāzes vai laika nobīde
+>> y = sin(2*pi*t*3-pi/4);
+>> plot(t,y)
+>> y = sin(2*pi*t*3);
+>> plot(t,y)
+>> %eksponensiāli rimstoša funkcija
+>> y = exp(-t/0.8);
+>> plot(t,y)
+>> y = exp(-t/0.8).*sin(2*pi*t*3);
+>> plot(t,y)
+>> y1 = exp(-t/0.8).*sin(2*pi*t*3);
+>> y1 = 1 + exp(-t/0.8).*sin(2*pi*t*3);
+>> plot(t,y,t,y1,"r--")
+>> y2 = 3*exp(-t/0.8).*sin(2*pi*t*3); %piereizinātais 3 maina amplitūdu
+>> plot(t,y,t,y2,"r--")
+>> y3 = exp(-(2*t)/0.8).*sin(2*pi*(2*t)*3);
+>> plot(t,y,t,y3,"r--")
+>> y3 = exp(-(2*t)/0.8).*sin(2*pi*(2*t)*3); %pie t piereizinātā vērtība ja >1 saspiež, ja <1 izstiepj
+>> y3 = 1 + 2*exp(-(0.7*t)/0.8).*sin(2*pi*(0.7*t)*3);
+>> plot(t,y,t,y3,"r--")
+>> f = inline("sin(2*pi*t)")
+
+ 
+>> f = inline('sin(2*pi*t)')
+
+f =
+
+     Inline function:
+     f(t) = sin(2*pi*t)
+
+>> plot(t,f(t))
+>> f = inline('exp(-(t)/tau).*sin(2*pi*(t)'), 't', 'tau');
+ f = inline('exp(-(t)/tau).*sin(2*pi*(t)'), 't', 'tau');
+                                                      ↑
+
+>> f = inline('exp(-(t)/tau).*sin(2*pi*(t)', 't', 'tau');
+>> f
+
+f =
+
+     Inline function:
+     f(t,tau) = exp(-(t)/tau).*sin(2*pi*(t)
+
+>> f(1,1)
+
+ 
+>> plot(t,f(t,0.8))
+
+ 
+>> f = inline('exp(-(t)/tau).*sin(2*pi*(t)*3)', 't', 'tau');
+>> plot(t,f(t,0.8))
+>> plot(t,f(t,0.8),t,f(t,0.8),'r--')
+>> plot(t,f(t,0.8),t,f(2*t,0.8),'r--')
+>> t4 = 0.3:0.02:2; %nodefinējam jaunu laika intervālu
+>> y4 = f(t4,0.8);
+>> plot(t,f(t,0.8),t4, y4,'r--')
+>> y4 = f(t4-0.3,0.8);
+>> plot(t,f(t,0.8),t4, y4,'r--')
