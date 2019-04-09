@@ -1,0 +1,43 @@
+%stundaa
+% U = I*R
+% I1(R1+R2+R3) -I2(R2)       +I3(0) = E1  
+% -I1(R2)       I2(R4+R5+R2) -I3(R5) = -E2
+% I1(0)        -I2(R5)       +I3(R6+R5+R7) = -E3 
+
+
+%man
+% I1(R1+R2+R3) -I2(R2)       +I3(0) =  E1
+% -I1(R2)       +I2(R2+R4+R6) -I3(R5) = -E2
+% I1(0)        -I2(R5)       +I3(R7+R5+R8) = -E3
+
+
+r = [1 2 3 4 5 6 7 8]; %rezistoru vērtības manas
+
+t=0:0.001:5;
+E1 = cos(t);
+E2 = 1.5*ones(size(t));
+E3 = sin(5*t);
+
+%matricā visa kreisā puse bez kontūrstrāvām
+R = [sum(r(1:3)) -r(2) 0;
+     -r(2) sum(r([2 4 6])) -r(5);
+     0 -r(5) sum(r([7 5 8]))
+    ];
+
+Ein = [E1; E2; E3];
+
+%aprēķina vienādojumu
+I = R\Ein;
+
+%aprēķināt spriegumu uz U5
+Ur5 = r(5).*(I(2,:)-I(3,:));
+
+%vai aprēķināts pareizi ar KSpL
+Ksp =  r(4)*I(2,:)+Ur5+E2+r(2)*(I(2,:)-I(1,:))+r(6)*I(2,:);
+
+%Jaudas aprēķinss R5 rezistoram
+Pr5 = Ur5.*(I(2,:)-I(3,:));
+
+
+%lai nav 10^-16 uzraksta axis([0 5 -1 1])
+%jāparāda 3 grafiki atskaitee
