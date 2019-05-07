@@ -1,0 +1,87 @@
+>> %f = x^2-4
+>> x0 = 10;
+>> x1 = x0-(x0^2-4)/(2*x0)
+
+x1 =
+
+    5.2000
+
+>> x2 = x1-(x1^2-4)/(2*x1)
+
+x2 =
+
+    2.9846
+
+>> x3 = x2-(x2^2-4)/(2*x2)
+
+x3 =
+
+    2.1624
+
+>> x4 = x3-(x3^2-4)/(2*x3)
+
+x4 =
+
+    2.0061
+    
+    
+    
+    
+    >> syms i0 a R Ein Ur
+>> diff(i0*(exp(a*(Ein-Ur))-1)-Ur/R, Ur)
+ 
+ans =
+- 1/R - a*i0*exp(a*(Ein - Ur))
+
+##Parastais skripts
+
+%Ein = Ud + Ur
+%ir = Ur/R
+%id = i0*(exp(a*Ud)-1)
+%id = i0*(exp(a*(Ein-Ur))-1)
+%i0*(exp(a*(Ein-Ur))-1)-Ur/R = 0
+
+global Ein i0 a R;
+i0 = 1;
+a = 1;
+R = 10;
+
+t = 0:0.01:1;
+eint = 100*sin(2*pi*t*2);
+Urt = [];
+
+for Ein = eint,
+   ur = newmet("funx","fund");
+   Urt = [Urt, ur];
+end
+
+plot(t,eint,t, Urt,'r--')
+
+##Funx
+
+function fx = funx(Ur)
+global Ein i0 a R;
+
+fx = i0*(exp(a*(Ein-Ur))-1)-Ur/R;
+
+#Fund
+
+function dfx = fund(Ur)
+global i0 a Ein R;
+
+dfx = - 1/R - a*i0*exp(a*(Ein - Ur));
+
+#Nūtona metode
+
+function x = newmet(fx,dfx)
+
+x0 = 0;
+epsi = 1e-3;
+
+x = x0;
+delta = feval(fx,x)/feval(dfx,x);  %kļūda
+
+while (abs(delta)>epsi)
+    delta = feval(fx,x)/feval(dfx,x);
+    x = x - delta;
+end
