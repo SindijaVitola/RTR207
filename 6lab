@@ -1,0 +1,61 @@
+syms x 
+
+k=2;
+deltaT=6;
+
+g1 = double(int(0*x,x,0,1.5));
+g2 = double(int(1.5*sin(2*pi*3.5*x-pi), x, 1.5, 2.5));
+g3 = double(int(zeros(size(x))-1.5, x, 2.5, 4));
+g4 = double(int(k*(x-deltaT),x, 4, 6));
+g5 = double(int(0, x, 6, 8));
+
+vid = (g1+g2+g3+g4+g5)/8 %jāuzskata par pareizo
+
+h = 0.01; %pie lielāka soļa abas vid vērtības būs precīzākas
+t = 0:h:8;
+vid_t = (1/(length(t)-1)) * sum(fja(t(1:end-1))) %skaitliskā katru reizi dos citādu rezultātu jo ir troksnis
+
+plot(t,fja(t),t,vid*ones(size(t)),'r--')
+grid on
+
+
+
+
+% laukuma rēķināšana sinusoīdai ar int
+% aprēķina vidējo vērtību (izdala ar laiku kur beidzas sin)\
+% lai aprēķinātu ef paceļ funkciju kvadrātā
+% ef = double(int(sin(2*pi*x),x,0,1.5)/1.5)  vienmēr sanāk 0,7071
+% bet var pārbaudīt to vai sanaak taa
+%vid nekad nav lielāks vai mazaaks par lielaako vai mazaako vērtību
+
+
+
+
+
+syms x 
+
+k=2;
+deltaT=6;
+
+g1 = double(int(0*x,x,0,1.5));
+g2 = double(int(1.5*sin(2*pi*3.5*x-pi), x, 1.5, 2.5));
+g3 = double(int(zeros(size(x))-1.5, x, 2.5, 4));
+g4 = double(int(k*(x-deltaT),x, 4, 6));
+g5 = double(int(0, x, 6, 8));
+
+vid = (g1+g2+g3+g4+g5)/8; %jāuzskata par pareizo
+
+ef1 = double(int((0*x,x,0,1.5))^2);
+ef2 = double(int((1.5*sin(2*pi*3.5*x-pi))^2, x, 1.5, 2.5));
+ef3 = double(int((zeros(size(x)))^2-1.5, x, 2.5, 4));
+ef4 = double(int((k*(x-deltaT))^2,x, 4, 6));
+ef5 = double(int((0)^2, x, 6, 8));
+
+ef = (sqrt(ef1+ef2+ef3+ef4+ef5))/8
+
+h = 0.01; %pie lielāka soļa abas vid vērtības būs precīzākas
+t = 0:h:8;
+vid_t = (1/(length(t)-1)) * sum(fja(t(1:end-1))); %skaitliskā katru reizi dos citādu rezultātu jo ir troksnis
+
+plot(t,fja(t),t,vid*ones(size(t)),'r--')
+grid on
